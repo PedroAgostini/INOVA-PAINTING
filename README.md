@@ -106,7 +106,7 @@ Abra **http://localhost:5510**.
 ## ✦ Publicando na Hostinger
 
 1. No hPanel, abra **Arquivos → Gerenciador de arquivos** do domínio.
-2. Envie **todo o conteúdo desta pasta** para `public_html/` (o `index.html` precisa ficar na raiz).
+2. Envie para `public_html/` apenas **`index.html`, `robots.txt`, `sitemap.xml` e a pasta `assets/`** (o `index.html` precisa ficar na raiz). Não envie `docs/`, `README.md` nem arquivos internos do projeto.
 3. Ative o **SSL** do domínio.
 4. A cada atualização de CSS/JS, aumente o `?v=` nos links do `index.html` para furar o cache dos visitantes.
 

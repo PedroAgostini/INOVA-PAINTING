@@ -8,3 +8,6 @@ desktop.ini
 # local tooling
 node_modules/
 .impeccable/
+
+# internal project notes (client data, not public)
+PRODUCT.md
