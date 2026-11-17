@@ -1,0 +1,22 @@
+/* TEAM */
+  Client: Inova Painting Corp
+  Founder & Owner: Junior Batista
+  Location: Medway, Massachusetts, USA
+  Contact: (781) 420-5111
+
+  Design & Development: Eu Sou TS
+  Site: https://eusouts.com.br/
+  Location: Brazil
+
+/* THANKS */
+  The homeowners and businesses of Medway and MetroWest
+  who trust Inova with their walls.
+
+/* SITE */
+  Last update: 2026/11/17
+  Language: English (US)
+  Doctype: HTML5
+  Standards: HTML5, CSS3, ECMAScript 2020, Schema.org, WCAG 2.2 (target AA)
+  Components: GSAP 3.12, ScrollTrigger, Lenis 1.1, Three.js r160, Leaflet 1.9, Web3Forms
+  Fonts: Young Serif, Manrope
+  Map tiles: Esri, OpenStreetMap contributors

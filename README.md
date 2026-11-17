@@ -76,18 +76,29 @@ Sem dependências instaladas — tudo via CDN com versão fixa:
 
 ```text
 .
-├── index.html              # página única (conteúdo, SEO, JSON‑LD)
-├── robots.txt
+├── index.html               # página principal (conteúdo, SEO, JSON‑LD)
+├── privacy-policy.html      # Privacy Policy  → /privacy-policy
+├── terms-of-use.html        # Terms of Use    → /terms-of-use
+├── 404.html                 # página de erro
+├── .htaccess                # HTTPS, URLs limpas, cache, compressão, segurança, antispam
+├── robots.txt               # produção
+├── robots-staging.txt       # servido só no ambiente de teste (bloqueia rastreamento)
 ├── sitemap.xml
+├── site.webmanifest         # PWA / ícones
+├── favicon.ico
+├── humans.txt               # quem fez o site
+├── llms.txt                 # resumo do negócio para assistentes de IA
+├── .well-known/security.txt
 ├── assets/
-│   ├── css/style.css       # design system, layout e responsivo
-│   ├── js/main.js          # motion, carrosséis, formulário, mapa, anti‑órfãs
-│   ├── js/logo3d.js        # cena Three.js do ícone
-│   └── img/
-│       ├── ICONE*.svg / TEXTO*.svg / LOGO-OFICIAL.svg   # identidade da marca
-│       ├── homes/          # imagens da galeria (640 / 1536 px, WebP)
-│       └── sections/       # imagens do hero, about e serviços
-└── docs/                   # prévias usadas neste README
+│   ├── css/style.css
+│   ├── js/main.js           # motion, carrosséis, formulário, mapa, anti‑órfãs
+│   ├── js/logo3d.js         # cena Three.js do ícone
+│   ├── js/antispam.js       # time‑trap, honeypot, filtro de links, e‑mail ofuscado
+│   ├── js/page.js           # script leve das páginas internas
+│   ├── icons/               # favicons e ícones do manifest
+│   └── img/                 # marca, og-image, homes/ e sections/
+├── scripts/clean-cache.*    # atualiza o ?v= de CSS/JS (bash e PowerShell)
+└── docs/                    # prévias usadas neste README
 ```
 
 ## ✦ Rodando localmente
@@ -103,16 +114,32 @@ npx serve .
 
 Abra **http://localhost:5510**.
 
+## ✦ Ambiente de teste
+
+O site está configurado para **https://inova.escolats.com.br**. Enquanto estiver nesse endereço, o `.htaccess` envia `X-Robots-Tag: noindex` e serve o `robots-staging.txt`, para o Google **não indexar** o ambiente de teste. As regras dependem do host, então param de valer sozinhas no domínio final.
+
+## ✦ Limpar cache após cada deploy
+
+O HTML nunca fica em cache; CSS e JS ficam por 1 ano e são renovados pelo `?v=` nos links. Depois de alterar CSS ou JS:
+
+```bash
+bash scripts/clean-cache.sh
+# ou, no Windows
+powershell -ExecutionPolicy Bypass -File scripts/clean-cache.ps1
+```
+
+Se ainda aparecer a versão antiga: **hPanel → Avançado → Cache Manager → Purge all**.
+
 ## ✦ Publicando na Hostinger
 
 1. No hPanel, abra **Arquivos → Gerenciador de arquivos** do domínio.
-2. Envie para `public_html/` apenas **`index.html`, `robots.txt`, `sitemap.xml` e a pasta `assets/`** (o `index.html` precisa ficar na raiz). Não envie `docs/`, `README.md` nem arquivos internos do projeto.
+2. Envie para `public_html/`: os arquivos `.html`, `.htaccess`, `robots.txt`, `robots-staging.txt`, `sitemap.xml`, `site.webmanifest`, `favicon.ico`, `humans.txt`, `llms.txt` e as pastas `assets/` e `.well-known/`. Não envie `docs/`, `scripts/`, `README.md` nem arquivos internos (o `.htaccess` também bloqueia esses caminhos).
 3. Ative o **SSL** do domínio.
-4. A cada atualização de CSS/JS, aumente o `?v=` nos links do `index.html` para furar o cache dos visitantes.
+4. A cada atualização de CSS/JS, rode o script de *clean cache* (acima).
 
 ## ✦ Checklist antes de publicar
 
-- [ ] **Domínio:** trocar `https://www.inovapaintingcorp.com` pelo domínio final (canonical, `og:url`, JSON‑LD, `sitemap.xml`, `robots.txt`).
+- [ ] **Domínio final:** trocar `inova.escolats.com.br` em todos os `.html`, `sitemap.xml`, `robots.txt`, `llms.txt` e `.well-known/security.txt`.
 - [ ] **Formulário:** colar a *access key* da Web3Forms no campo `access_key` do `index.html`.
 - [ ] **Facebook:** inserir a URL exata da página no rodapé.
 - [ ] **Logo:** o `LOGO-OFICIAL.svg` recebido está sem o “G” (“PAINTIN”); o site usa ícone + `TEXTO.svg`. Substituir quando houver a versão corrigida.
@@ -120,6 +147,8 @@ Abra **http://localhost:5510**.
 - [ ] **Imagens:** substituir as imagens ilustrativas por fotos reais de obras da Inova.
 - [ ] **Imagem de compartilhamento:** definir uma `og:image` própria.
 - [ ] **Google Search Console:** enviar o `sitemap.xml` após o go‑live.
+- [ ] **Textos legais:** revisar Privacy Policy e Terms of Use com um advogado nos EUA (são modelos, não aconselhamento jurídico).
+- [ ] **Analytics/Ads:** se instalar Google Ads, GA4 ou Meta Pixel, atualizar a seção *Cookies* da Privacy Policy.
 
 ## ✦ SEO local
 

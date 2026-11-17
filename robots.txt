@@ -1,3 +1,7 @@
+# Inova Painting Corp
 User-agent: *
 Allow: /
-Sitemap: https://www.inovapaintingcorp.com/sitemap.xml
+Disallow: /docs/
+Disallow: /scripts/
+
+Sitemap: https://inova.escolats.com.br/sitemap.xml

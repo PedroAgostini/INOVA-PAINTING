@@ -1,0 +1,16 @@
+{
+  "name": "Inova Painting Corp",
+  "short_name": "Inova Painting",
+  "description": "Interior, exterior, cabinet and commercial painting in Medway, MA and nearby towns.",
+  "lang": "en-US",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F1EEE7",
+  "theme_color": "#101B2D",
+  "icons": [
+    { "src": "/assets/icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
