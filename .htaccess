@@ -1,6 +1,7 @@
 # =====================================================================
 #  Inova Painting Corp — Apache / LiteSpeed (Hostinger)
-#  Test environment: inova.escolats.com.br  (noindex is applied below)
+#  Production: https://inovapaintingpro.com
+#  Test environment: inova.escolats.com.br (noindex applied below)
 # =====================================================================
 
 Options -Indexes -MultiViews
@@ -19,7 +20,8 @@ ErrorDocument 403 /404.html
   AddType image/svg+xml              .svg
   AddType image/x-icon               .ico
   AddType text/plain                 .txt
-  AddCharset UTF-8 .html .css .js .txt .xml .webmanifest
+  AddType text/vcard                 .vcf
+  AddCharset UTF-8 .html .css .js .txt .xml .webmanifest .vcf
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -63,7 +65,18 @@ ErrorDocument 403 /404.html
   RewriteRule ^robots\.txt$ robots-staging.txt [L]
 
   # -------------------------------------------------------------------
-  #  Clean URLs:  /index.html -> /   ·   /page.html -> /page   ·   /page -> page.html
+  #  Contact card aliases (business card / QR / bio links)
+  # -------------------------------------------------------------------
+  RewriteRule ^(links|contact|bio|vcard)/?$ /card [R=301,L,NC]
+
+  # -------------------------------------------------------------------
+  #  Remove trailing slash from non-directory URLs:  /card/ -> /card
+  # -------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+  # -------------------------------------------------------------------
+  #  Clean URLs (no .html anywhere):  /index.html -> /   ·   /page.html -> /page   ·   /page -> page.html
   # -------------------------------------------------------------------
   RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
   RewriteRule ^ / [R=301,L]
@@ -130,6 +143,9 @@ ErrorDocument 403 /404.html
 </IfModule>
 
 <IfModule mod_headers.c>
+  <FilesMatch "\.vcf$">
+    Header set Content-Disposition "attachment; filename=Inova-Painting.vcf"
+  </FilesMatch>
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>

@@ -80,6 +80,7 @@ Sem dependências instaladas — tudo via CDN com versão fixa:
 ├── privacy-policy.html      # Privacy Policy  → /privacy-policy
 ├── terms-of-use.html        # Terms of Use    → /terms-of-use
 ├── 404.html                 # página de erro
+├── card.html                # cartão de visitas digital → /card (aliases /links, /contact, /bio)
 ├── .htaccess                # HTTPS, URLs limpas, cache, compressão, segurança, antispam
 ├── robots.txt               # produção
 ├── robots-staging.txt       # servido só no ambiente de teste (bloqueia rastreamento)
@@ -91,12 +92,15 @@ Sem dependências instaladas — tudo via CDN com versão fixa:
 ├── .well-known/security.txt
 ├── assets/
 │   ├── css/style.css
+│   ├── css/card.css         # estilo do cartão de visitas
 │   ├── js/main.js           # motion, carrosséis, formulário, mapa, anti‑órfãs
 │   ├── js/logo3d.js         # cena Three.js do ícone
 │   ├── js/antispam.js       # time‑trap, honeypot, filtro de links, e‑mail ofuscado
 │   ├── js/page.js           # script leve das páginas internas
+│   ├── js/card.js           # compartilhar / copiar link do cartão
+│   ├── inova-painting.vcf   # contato (vCard) do botão Save Contact
 │   ├── icons/               # favicons e ícones do manifest
-│   └── img/                 # marca, og-image, homes/ e sections/
+│   └── img/                 # marca, og-image, qr-card (svg/png), homes/ e sections/
 ├── scripts/clean-cache.*    # atualiza o ?v= de CSS/JS (bash e PowerShell)
 └── docs/                    # prévias usadas neste README
 ```
@@ -114,9 +118,17 @@ npx serve .
 
 Abra **http://localhost:5510**.
 
-## ✦ Ambiente de teste
+## ✦ Domínio e ambiente de teste
 
-O site está configurado para **https://inova.escolats.com.br**. Enquanto estiver nesse endereço, o `.htaccess` envia `X-Robots-Tag: noindex` e serve o `robots-staging.txt`, para o Google **não indexar** o ambiente de teste. As regras dependem do host, então param de valer sozinhas no domínio final.
+- **Produção:** https://inovapaintingpro.com — URLs sem `.html` (`/privacy-policy`, `/terms-of-use`, `/card`). O `.htaccess` redireciona qualquer `.html` e barras finais para a versão limpa.
+- **Teste:** se o mesmo código for publicado em `inova.escolats.com.br`, o `.htaccess` envia `X-Robots-Tag: noindex` e serve o `robots-staging.txt`, para o Google não indexar o ambiente de teste.
+
+## ✦ Cartão de visitas (`/card`)
+
+Página no estilo *link na bio* para o QR code do cartão físico, Instagram e assinatura de e‑mail: ligar, mandar SMS, e‑mail, pedir orçamento, site, Instagram, Facebook, reviews do Thumbtack, **Save Contact** (vCard) e **Share**. Fica fora do sitemap (`noindex`).
+
+- QR code para impressão: `assets/img/qr-card.svg` (vetor) e `assets/img/qr-card.png` (1024 px), apontando para `https://inovapaintingpro.com/card`.
+- `/links`, `/contact`, `/bio` e `/vcard` redirecionam para `/card`.
 
 ## ✦ Limpar cache após cada deploy
 
@@ -133,15 +145,14 @@ Se ainda aparecer a versão antiga: **hPanel → Avançado → Cache Manager →
 ## ✦ Publicando na Hostinger
 
 1. No hPanel, abra **Arquivos → Gerenciador de arquivos** do domínio.
-2. Envie para `public_html/`: os arquivos `.html`, `.htaccess`, `robots.txt`, `robots-staging.txt`, `sitemap.xml`, `site.webmanifest`, `favicon.ico`, `humans.txt`, `llms.txt` e as pastas `assets/` e `.well-known/`. Não envie `docs/`, `scripts/`, `README.md` nem arquivos internos (o `.htaccess` também bloqueia esses caminhos).
+2. Envie para `public_html/`: os arquivos `.html` (incluindo `card.html`), `.htaccess`, `robots.txt`, `robots-staging.txt`, `sitemap.xml`, `site.webmanifest`, `favicon.ico`, `humans.txt`, `llms.txt` e as pastas `assets/` e `.well-known/`. Não envie `docs/`, `scripts/`, `README.md` nem arquivos internos (o `.htaccess` também bloqueia esses caminhos).
 3. Ative o **SSL** do domínio.
 4. A cada atualização de CSS/JS, rode o script de *clean cache* (acima).
 
 ## ✦ Checklist antes de publicar
 
-- [ ] **Domínio final:** trocar `inova.escolats.com.br` em todos os `.html`, `sitemap.xml`, `robots.txt`, `llms.txt` e `.well-known/security.txt`.
 - [ ] **Formulário:** colar a *access key* da Web3Forms no campo `access_key` do `index.html`.
-- [ ] **Facebook:** inserir a URL exata da página no rodapé.
+- [ ] **Facebook:** inserir a URL exata da página no rodapé, no `card.html` e no `sameAs` do JSON‑LD.
 - [ ] **Logo:** o `LOGO-OFICIAL.svg` recebido está sem o “G” (“PAINTIN”); o site usa ícone + `TEXTO.svg`. Substituir quando houver a versão corrigida.
 - [ ] **Reviews do Thumbtack:** confirmar que a exibição das avaliações no site é permitida pelos termos da plataforma (com atribuição e link para o perfil).
 - [ ] **Imagens:** substituir as imagens ilustrativas por fotos reais de obras da Inova.

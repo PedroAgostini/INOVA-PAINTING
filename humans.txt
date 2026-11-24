@@ -13,7 +13,9 @@
   who trust Inova with their walls.
 
 /* SITE */
-  Last update: 2026/11/17
+  Last update: 2026/11/24
+  Website: https://inovapaintingpro.com
+  Contact card: https://inovapaintingpro.com/card
   Language: English (US)
   Doctype: HTML5
   Standards: HTML5, CSS3, ECMAScript 2020, Schema.org, WCAG 2.2 (target AA)

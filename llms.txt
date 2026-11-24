@@ -18,9 +18,10 @@ Key facts:
 
 ## Pages
 
-- [Home](https://inova.escolats.com.br/): services, project inspiration, customer reviews, how it works, service-area map, FAQ and quote form
-- [Privacy Policy](https://inova.escolats.com.br/privacy-policy): how quote-request data is collected, used and protected
-- [Terms of Use](https://inova.escolats.com.br/terms-of-use): website terms, estimates, images and reviews
+- [Home](https://inovapaintingpro.com/): services, project inspiration, customer reviews, how it works, service-area map, FAQ and quote form
+- [Privacy Policy](https://inovapaintingpro.com/privacy-policy): how quote-request data is collected, used and protected
+- [Terms of Use](https://inovapaintingpro.com/terms-of-use): website terms, estimates, images and reviews
+- [Contact card](https://inovapaintingpro.com/card): phone, text, email, Instagram, Facebook and a downloadable vCard
 
 ## Optional
 
