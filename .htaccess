@@ -67,10 +67,10 @@ ErrorDocument 403 /404.html
   # -------------------------------------------------------------------
   #  Contact card aliases (business card / QR / bio links)
   # -------------------------------------------------------------------
-  RewriteRule ^(links|contact|bio|vcard)/?$ /card [R=301,L,NC]
+  RewriteRule ^(card|links|contact|bio|vcard)/?$ /redirect [R=301,L,NC]
 
   # -------------------------------------------------------------------
-  #  Remove trailing slash from non-directory URLs:  /card/ -> /card
+  #  Remove trailing slash from non-directory URLs:  /redirect/ -> /redirect
   # -------------------------------------------------------------------
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.+)/$ /$1 [R=301,L]

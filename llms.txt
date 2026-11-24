@@ -21,7 +21,7 @@ Key facts:
 - [Home](https://inovapaintingpro.com/): services, project inspiration, customer reviews, how it works, service-area map, FAQ and quote form
 - [Privacy Policy](https://inovapaintingpro.com/privacy-policy): how quote-request data is collected, used and protected
 - [Terms of Use](https://inovapaintingpro.com/terms-of-use): website terms, estimates, images and reviews
-- [Contact card](https://inovapaintingpro.com/card): phone, text, email, Instagram, Facebook and a downloadable vCard
+- [Contact card](https://inovapaintingpro.com/redirect): phone, text, email, Instagram, Facebook and a downloadable vCard
 
 ## Optional
 

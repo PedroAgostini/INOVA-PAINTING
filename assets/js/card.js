@@ -2,7 +2,7 @@
 (() => {
   const btn = document.querySelector('.bc-share'), toast = document.querySelector('.bc-toast');
   if (!btn) return;
-  const url = 'https://inovapaintingpro.com/card';
+  const url = 'https://inovapaintingpro.com/redirect';
   const show = msg => { toast.textContent = msg; toast.hidden = false; clearTimeout(show.t); show.t = setTimeout(() => toast.hidden = true, 2200); };
   btn.addEventListener('click', async () => {
     const data = { title: 'Inova Painting Corp', text: 'House painters in Medway, MA: call or text (781) 420-5111', url };

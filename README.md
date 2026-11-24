@@ -91,7 +91,7 @@ Sem dependências instaladas — tudo via CDN com versão fixa:
 ├── privacy-policy.html      # Privacy Policy  → /privacy-policy
 ├── terms-of-use.html        # Terms of Use    → /terms-of-use
 ├── 404.html                 # página de erro
-├── card.html                # cartão de visitas digital → /card (aliases /links, /contact, /bio)
+├── redirect.html            # cartão de visitas digital → /redirect (aliases /card, /links, /contact, /bio)
 ├── .htaccess                # HTTPS, URLs limpas, cache, compressão, segurança, antispam
 ├── robots.txt               # produção
 ├── robots-staging.txt       # servido só no ambiente de teste (bloqueia rastreamento)
@@ -131,15 +131,15 @@ Abra **http://localhost:5510**.
 
 ## ✦ Domínio e ambiente de teste
 
-- **Produção:** https://inovapaintingpro.com — URLs sem `.html` (`/privacy-policy`, `/terms-of-use`, `/card`). O `.htaccess` redireciona qualquer `.html` e barras finais para a versão limpa.
+- **Produção:** https://inovapaintingpro.com — URLs sem `.html` (`/privacy-policy`, `/terms-of-use`, `/redirect`). O `.htaccess` redireciona qualquer `.html` e barras finais para a versão limpa.
 - **Teste:** se o mesmo código for publicado em `inova.escolats.com.br`, o `.htaccess` envia `X-Robots-Tag: noindex` e serve o `robots-staging.txt`, para o Google não indexar o ambiente de teste.
 
-## ✦ Cartão de visitas (`/card`)
+## ✦ Cartão de visitas (`/redirect`)
 
 Página no estilo *link na bio* para o QR code do cartão físico, Instagram e assinatura de e‑mail: ligar, mandar SMS, e‑mail, pedir orçamento, site, Instagram, Facebook, reviews do Thumbtack, **Save Contact** (vCard) e **Share**. Fica fora do sitemap (`noindex`).
 
-- QR code para impressão: `assets/img/qr-card.svg` (vetor) e `assets/img/qr-card.png` (1024 px), apontando para `https://inovapaintingpro.com/card`.
-- `/links`, `/contact`, `/bio` e `/vcard` redirecionam para `/card`.
+- QR code para impressão: `assets/img/qr-card.svg` (vetor) e `assets/img/qr-card.png` (1024 px), apontando para `https://inovapaintingpro.com/redirect`.
+- `/card`, `/links`, `/contact`, `/bio` e `/vcard` redirecionam para `/redirect`.
 
 ## ✦ Limpar cache após cada deploy
 
@@ -156,13 +156,13 @@ Se ainda aparecer a versão antiga: **hPanel → Avançado → Cache Manager →
 ## ✦ Publicando na Hostinger
 
 1. No hPanel, abra **Arquivos → Gerenciador de arquivos** do domínio.
-2. Envie para `public_html/`: os arquivos `.html` (incluindo `card.html`), `.htaccess`, `robots.txt`, `robots-staging.txt`, `sitemap.xml`, `site.webmanifest`, `favicon.ico`, `humans.txt`, `llms.txt` e as pastas `assets/` e `.well-known/`. Não envie `docs/`, `scripts/`, `README.md` nem arquivos internos (o `.htaccess` também bloqueia esses caminhos).
+2. Envie para `public_html/`: os arquivos `.html` (incluindo `redirect.html`), `.htaccess`, `robots.txt`, `robots-staging.txt`, `sitemap.xml`, `site.webmanifest`, `favicon.ico`, `humans.txt`, `llms.txt` e as pastas `assets/` e `.well-known/`. Não envie `docs/`, `scripts/`, `README.md` nem arquivos internos (o `.htaccess` também bloqueia esses caminhos).
 3. Ative o **SSL** do domínio.
 4. A cada atualização de CSS/JS, rode o script de *clean cache* (acima).
 
 ## ✦ Checklist antes de publicar
 
-- [ ] **Facebook:** inserir a URL exata da página no rodapé, no `card.html` e no `sameAs` do JSON‑LD.
+- [ ] **Facebook:** inserir a URL exata da página no rodapé, no `redirect.html` e no `sameAs` do JSON‑LD.
 - [ ] **Logo:** o `LOGO-OFICIAL.svg` recebido está sem o “G” (“PAINTIN”); o site usa ícone + `TEXTO.svg`. Substituir quando houver a versão corrigida.
 - [ ] **Reviews do Thumbtack:** confirmar que a exibição das avaliações no site é permitida pelos termos da plataforma (com atribuição e link para o perfil).
 - [ ] **Imagens:** substituir as imagens ilustrativas por fotos reais de obras da Inova.
