@@ -92,6 +92,15 @@
     new IntersectionObserver((es, o) => es.forEach(en => { if (en.isIntersecting && ready) { roller(.55, reduce ? 1 : 1600); o.disconnect(); } }), { threshold: .5 }).observe(rv);
   }
 
+  /* campaign attribution: keep UTM / click ids from the landing page for the whole session */
+  const ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid'];
+  try {
+    const q = new URLSearchParams(location.search), found = {};
+    ATTR_KEYS.forEach(k => { if (q.get(k)) found[k] = q.get(k); });
+    if (Object.keys(found).length) sessionStorage.setItem('inova-attr', JSON.stringify({ ...found, landing_page: location.href }));
+  } catch (e) {}
+  const attribution = () => { try { return JSON.parse(sessionStorage.getItem('inova-attr') || '{}'); } catch (e) { return {}; } };
+
   /* quote form */
   const form = $('#quote-form');
   if (form) {
@@ -106,10 +115,30 @@
       btn.disabled = true; lbl.textContent = 'Sending…';
       try {
         const data = new FormData(form);
-        if (data.get('access_key') === 'YOUR_WEB3FORMS_ACCESS_KEY') { console.warn('[Inova] Web3Forms key missing: demo submit only.'); await new Promise(r => setTimeout(r, 700)); }
-        else { const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } }); const j = await res.json(); if (!j.success) throw new Error(j.message); }
+        const lead = {
+          form_id: form.dataset.formId || 'form01',
+          source: location.hostname,
+          page: location.href,
+          referrer: document.referrer || null,
+          name: data.get('name'), phone: data.get('phone'), email: data.get('email') || null,
+          town: data.get('town'), service: data.get('service'), message: data.get('message') || null,
+          ...attribution(),
+          submitted_at: new Date().toISOString()
+        };
+        const toWeb3 = data.get('access_key') && data.get('access_key') !== 'YOUR_WEB3FORMS_ACCESS_KEY'
+          ? fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+              .then(r => r.json()).then(r => { if (!r.success) throw new Error(r.message); })
+          : Promise.reject(new Error('Web3Forms key missing'));
+        const toHook = form.dataset.webhook
+          ? fetch(form.dataset.webhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lead), keepalive: true })
+              .then(r => { if (!r.ok) throw new Error('Webhook ' + r.status); })
+          : Promise.reject(new Error('Webhook missing'));
+        const results = await Promise.allSettled([toWeb3, toHook]);
+        results.forEach((r, i) => r.status === 'rejected' && console.warn('[Inova] lead delivery failed:', ['Web3Forms', 'Webhook'][i], r.reason));
+        if (!results.some(r => r.status === 'fulfilled')) throw new Error('No delivery channel succeeded');
         body.hidden = true; done.hidden = false; done.focus();
-        window.gtag?.('event', 'generate_lead', { service: data.get('service') });
+        window.gtag?.('event', 'generate_lead', { service: lead.service, form_id: lead.form_id });
+        window.fbq?.('track', 'Lead', { content_name: lead.service });
       } catch (x) { err.hidden = false; lbl.textContent = 'Send My Quote Request'; btn.disabled = false; }
     });
   }

@@ -59,6 +59,17 @@ Tudo é **HTML, CSS e JavaScript puros**, sem etapa de build: os arquivos sobem 
 | 10 | **FAQ** | Perguntas frequentes (também em *schema* `FAQPage`). |
 | 11 | **Get your quote** | Formulário com validação, estados de envio/erro/sucesso. |
 
+## ✦ Leads do formulário
+
+Cada pedido de orçamento é enviado **em paralelo** para dois canais. O visitante vê a confirmação se pelo menos um deles receber:
+
+| Canal | Configuração no `index.html` | Conteúdo |
+|---|---|---|
+| **Web3Forms** → e‑mail | `access_key` + `form_id` = `form01` | Campos do formulário |
+| **Webhook** (Iron Warden) | `data-webhook` e `data-form-id` no `<form>` | JSON com `form_id`, campos, `page`, `referrer`, UTMs (`utm_*`), `gclid`/`gbraid`/`wbraid`/`fbclid`/`msclkid`, `landing_page` e `submitted_at` |
+
+Os parâmetros de campanha são guardados na primeira página da visita (sessionStorage), então o lead leva a origem do anúncio mesmo que o visitante navegue antes de enviar. Envios de robôs são descartados antes de qualquer envio (`antispam.js`).
+
 ## ✦ Stack
 
 Sem dependências instaladas — tudo via CDN com versão fixa:
@@ -151,7 +162,6 @@ Se ainda aparecer a versão antiga: **hPanel → Avançado → Cache Manager →
 
 ## ✦ Checklist antes de publicar
 
-- [ ] **Formulário:** colar a *access key* da Web3Forms no campo `access_key` do `index.html`.
 - [ ] **Facebook:** inserir a URL exata da página no rodapé, no `card.html` e no `sameAs` do JSON‑LD.
 - [ ] **Logo:** o `LOGO-OFICIAL.svg` recebido está sem o “G” (“PAINTIN”); o site usa ícone + `TEXTO.svg`. Substituir quando houver a versão corrigida.
 - [ ] **Reviews do Thumbtack:** confirmar que a exibição das avaliações no site é permitida pelos termos da plataforma (com atribuição e link para o perfil).

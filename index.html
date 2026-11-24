@@ -32,8 +32,8 @@
 <link rel="author" type="text/plain" href="/humans.txt">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css?v=202611241512">
-<link rel="stylesheet" href="assets/css/style.css?v=202611241512">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css?v=202611241519">
+<link rel="stylesheet" href="assets/css/style.css?v=202611241519">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HousePainter","@id":"https://inovapaintingpro.com/#business","name":"Inova Painting Corp","url":"https://inovapaintingpro.com/","logo":"https://inovapaintingpro.com/assets/img/ICONE.svg","image":"https://inovapaintingpro.com/assets/img/sections/inova-hero-social.jpg","telephone":"+1-781-420-5111","email":"inovapaintingma@gmail.com","founder":{"@type":"Person","name":"Junior Batista"},
 "address":{"@type":"PostalAddress","streetAddress":"11 Villa Street","addressLocality":"Medway","addressRegion":"MA","postalCode":"02053","addressCountry":"US"},
@@ -52,7 +52,7 @@
 {"@type":"Question","name":"Do you remove popcorn ceilings and wallpaper?","acceptedAnswer":{"@type":"Answer","text":"Yes. We remove popcorn ceilings and old wallpaper and prepare the surfaces for a clean, modern finish."}},
 {"@type":"Question","name":"How do I get a quote?","acceptedAnswer":{"@type":"Answer","text":"Fill out the quote form, call or text (781) 420-5111. Junior will schedule an in-person assessment and send you a detailed estimate."}}]}
 </script>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js?v=202611241512","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js?v=202611241519","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -713,9 +713,10 @@
         <a class="contact-card" href="#quote" data-mail="inovapaintingma|gmail.com"><span class="cc-ic"><svg class="ic"><use href="#i-mail"/></svg></span><span class="cc-txt"><small>Email us</small><strong data-mail-text>inovapaintingma [at] gmail.com</strong></span><svg class="ic cc-go"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
-    <form class="form" id="quote-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+    <form class="form" id="quote-form" action="https://api.web3forms.com/submit" method="POST" novalidate data-form-id="form01" data-webhook="https://ironwarden.eusouts.com/hooks/leads/Z0cq2aT5L_kbpbuWRrpsEJ_Ik0aCX0sSKTYa0GIjsB0">
       <!-- TODO: paste the Web3Forms access key (free at web3forms.com; delivers to <span data-mail-text>inovapaintingma [at] gmail.com</span>) -->
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="access_key" value="c8a80850-e9c4-401c-9785-4081edb24c09">
+      <input type="hidden" name="form_id" value="form01">
       <input type="hidden" name="subject" value="New painting quote request from the website">
       <input type="hidden" name="from_name" value="Inova Painting website">
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -723,7 +724,7 @@
         <h3 class="form-title">Request a quote</h3>
         <div class="row2">
           <label class="field"><span>Full name</span><input name="name" required autocomplete="name" placeholder="Jane Smith"><em class="err">Please enter your name.</em></label>
-          <label class="field"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" placeholder="(508) 555-0123" pattern="[0-9()+\-\s.]{10,}"><em class="err">Enter a phone number we can call or text.</em></label>
+          <label class="field"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" placeholder="(508) 555-0123" pattern="[0-9\s\(\)\+\.\-]{10,}"><em class="err">Enter a phone number we can call or text.</em></label>
         </div>
         <div class="row2">
           <label class="field"><span>Email <small>(optional)</small></span><input name="email" type="email" autocomplete="email" placeholder="jane@email.com"><em class="err">That email doesn't look right.</em></label>
@@ -768,11 +769,11 @@
   <div class="ft-wm" aria-hidden="true"></div>
 </footer>
 <div class="mbar"><a href="tel:+17814205111"><svg class="ic"><use href="#i-phone"/></svg>Call</a><a href="sms:+17814205111"><svg class="ic"><use href="#i-msg"/></svg>Text</a><a href="#quote" class="mbar-q">Get a Quote</a></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js?v=202611241512" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js?v=202611241512" defer></script>
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js?v=202611241512" defer></script>
-<script src="assets/js/antispam.js?v=202611241512" defer></script>
-<script src="assets/js/main.js?v=202611241512" defer></script>
-<script type="module" src="assets/js/logo3d.js?v=202611241512"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js?v=202611241519" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js?v=202611241519" defer></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js?v=202611241519" defer></script>
+<script src="assets/js/antispam.js?v=202611241519" defer></script>
+<script src="assets/js/main.js?v=202611241519" defer></script>
+<script type="module" src="assets/js/logo3d.js?v=202611241519"></script>
 </body>
 </html>
