@@ -68,7 +68,7 @@ Cada pedido de orçamento é enviado **em paralelo** para dois canais. O visitan
 | **Web3Forms** → e‑mail | `access_key` + `form_id` = `form01` | Campos do formulário |
 | **Webhook** (Iron Warden) | `data-webhook` e `data-form-id` no `<form>` | JSON com `form_id`, campos, `phone_e164`, `zip`, `town` + `in_service_area` (deduzidos do ZIP), `page`, `referrer`, UTMs (`utm_*`), `gclid`/`gbraid`/`wbraid`/`fbclid`/`msclkid`, `landing_page` e `submitted_at` |
 
-Máscaras: telefone no formato `(508) 555-0100` (aceita colar com +1, pontos ou espaços) e ZIP `02053` / `02053-1234`. Os parâmetros de campanha são guardados na primeira página da visita (sessionStorage), então o lead leva a origem do anúncio mesmo que o visitante navegue antes de enviar. Envios de robôs são descartados antes de qualquer envio (`antispam.js`).
+Máscaras: telefone no formato `(508) 555-0100` (aceita colar com +1, pontos ou espaços) e ZIP com 5 dígitos (`02053`). Os parâmetros de campanha são guardados na primeira página da visita (sessionStorage), então o lead leva a origem do anúncio mesmo que o visitante navegue antes de enviar. Envios de robôs são descartados antes de qualquer envio (`antispam.js`).
 
 ## ✦ Stack
 

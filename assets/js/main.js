@@ -134,8 +134,7 @@
     tidy('name', v => v.replace(/\s+/g, ' ').trim());
     const zip = form.querySelector('[name=zip]');
     if (zip) zip.addEventListener('input', () => {
-      const d = zip.value.replace(/\D/g, '').slice(0, 9);
-      const out = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      const out = zip.value.replace(/\D/g, '').slice(0, 5);
       if (out !== zip.value) zip.value = out;
     });
 
