@@ -101,11 +101,44 @@
   } catch (e) {}
   const attribution = () => { try { return JSON.parse(sessionStorage.getItem('inova-attr') || '{}'); } catch (e) { return {}; } };
 
+  /* service-area ZIPs: tag leads with town and whether they fall inside the area */
+  const AREA_ZIPS = { '02053': 'Medway', '02038': 'Franklin', '02054': 'Millis', '01746': 'Holliston', '01757': 'Milford', '02019': 'Bellingham',
+    '02056': 'Norfolk', '01748': 'Hopkinton', '01721': 'Ashland', '01770': 'Sherborn', '02081': 'Walpole', '02071': 'Walpole', '01760': 'Natick' };
+  const zipArea = z => { const k = String(z || '').slice(0, 5), town = AREA_ZIPS[k]; return { town: town || null, in_service_area: !!town }; };
+
   /* quote form */
   const form = $('#quote-form');
   if (form) {
     const body = $('.form-body', form), done = $('.form-done', form), err = $('.form-error', form), btn = $('button[type=submit]', form), lbl = $('.lbl', btn);
     const check = f => { const ok = f.checkValidity(); f.closest('.field')?.classList.toggle('invalid', !ok); return ok; };
+    /* input masks: US phone (XXX) XXX-XXXX, tidy email / name / town */
+    const phone = form.querySelector('[name=phone]');
+    const digitsOf = v => { let d = v.replace(/\D/g, ''); if (d.length > 10 && d[0] === '1') d = d.slice(1); return d.slice(0, 10); };
+    const fmtPhone = d => !d ? '' : d.length < 4 ? '(' + d : d.length < 7 ? `(${d.slice(0, 3)}) ${d.slice(3)}` : `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+    if (phone) {
+      phone.addEventListener('input', e => {
+        const el = e.target, caret = el.selectionStart ?? el.value.length;
+        const before = el.value.slice(0, caret).replace(/\D/g, '').length;
+        const d = digitsOf(el.value), out = fmtPhone(d);
+        if (out === el.value) return;
+        el.value = out;
+        let pos = 0, seen = 0;
+        while (pos < out.length && seen < before) { if (/\d/.test(out[pos])) seen++; pos++; }
+        if (e.inputType && e.inputType.startsWith('delete') && pos < out.length && !/\d/.test(out[pos - 1] || '')) pos = Math.max(0, pos);
+        try { el.setSelectionRange(pos, pos); } catch (x) {}
+      });
+      phone.addEventListener('paste', () => requestAnimationFrame(() => { phone.value = fmtPhone(digitsOf(phone.value)); }));
+    }
+    const tidy = (name, fn) => { const el = form.querySelector(`[name=${name}]`); el && el.addEventListener('blur', () => { el.value = fn(el.value); }); };
+    tidy('email', v => v.trim().toLowerCase());
+    tidy('name', v => v.replace(/\s+/g, ' ').trim());
+    const zip = form.querySelector('[name=zip]');
+    if (zip) zip.addEventListener('input', () => {
+      const d = zip.value.replace(/\D/g, '').slice(0, 9);
+      const out = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
+      if (out !== zip.value) zip.value = out;
+    });
+
     $$('input,select', form).forEach(f => f.addEventListener('blur', () => f.value && check(f)));
     $$('input,select', form).forEach(f => f.addEventListener('input', () => f.closest('.field.invalid') && check(f)));
     form.addEventListener('submit', async e => {
@@ -120,8 +153,8 @@
           source: location.hostname,
           page: location.href,
           referrer: document.referrer || null,
-          name: data.get('name'), phone: data.get('phone'), email: data.get('email') || null,
-          town: data.get('town'), service: data.get('service'), message: data.get('message') || null,
+          name: data.get('name'), phone: data.get('phone'), phone_e164: '+1' + String(data.get('phone') || '').replace(/\D/g, '').slice(-10), email: data.get('email') || null,
+          zip: data.get('zip'), ...zipArea(data.get('zip')), service: data.get('service'), message: data.get('message') || null,
           ...attribution(),
           submitted_at: new Date().toISOString()
         };
