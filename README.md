@@ -136,7 +136,7 @@ Abra **http://localhost:5510**.
 
 ## ✦ Cartão de visitas (`/redirect`)
 
-Página no estilo *link na bio* para o QR code do cartão físico, Instagram e assinatura de e‑mail: ligar, mandar SMS, e‑mail, pedir orçamento, site, Instagram, Facebook, reviews do Thumbtack, **Save Contact** (vCard) e **Share**. Fica fora do sitemap (`noindex`).
+Página no estilo *link na bio* para o QR code do cartão físico, Instagram e assinatura de e‑mail: ligar, mandar SMS, e‑mail, pedir orçamento, site, Instagram, reviews do Thumbtack, **Save Contact** (vCard) e **Share**. Fica fora do sitemap (`noindex`).
 
 - QR code para impressão: `assets/img/qr-card.svg` (vetor) e `assets/img/qr-card.png` (1024 px), apontando para `https://inovapaintingpro.com/redirect`.
 - `/card`, `/links`, `/contact`, `/bio` e `/vcard` redirecionam para `/redirect`.
@@ -162,7 +162,6 @@ Se ainda aparecer a versão antiga: **hPanel → Avançado → Cache Manager →
 
 ## ✦ Checklist antes de publicar
 
-- [ ] **Facebook:** inserir a URL exata da página no rodapé, no `redirect.html` e no `sameAs` do JSON‑LD.
 - [ ] **Logo:** o `LOGO-OFICIAL.svg` recebido está sem o “G” (“PAINTIN”); o site usa ícone + `TEXTO.svg`. Substituir quando houver a versão corrigida.
 - [ ] **Reviews do Thumbtack:** confirmar que a exibição das avaliações no site é permitida pelos termos da plataforma (com atribuição e link para o perfil).
 - [ ] **Imagens:** substituir as imagens ilustrativas por fotos reais de obras da Inova.
